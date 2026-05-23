@@ -9,4 +9,4 @@ publish: true
 
 ## 文章列表
 
-- [[methodology/从零搭建个人知识网站|“”从零搭建个人知识网站：Obsidian + Quartz + GitHub Pages 自动发布流程“”]] — 2026-05-23 · 这是一份从零搭建个人知识网站的完整流程记录，采用 Obsidian 写作、Markdown 管理、Quartz 生成静态网站、GitHub Pages 自动部署的方案。
+- [[methodology/从零搭建个人知识网站|从零搭建个人知识网站：Obsidian + Quartz + GitHub Pages 自动发布流程]] — 2026-05-23 · 这是一份从零搭建个人知识网站的完整流程记录，采用 Obsidian 写作、Markdown 管理、Quartz 生成静态网站、GitHub Pages 自动部署的方案。
