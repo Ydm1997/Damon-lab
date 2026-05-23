@@ -21,7 +21,8 @@
     "gen": "node scripts/generate-index.cjs",
     "site:dev": "npm run gen && npx quartz build --serve",
     "site:build": "npm run gen && npx quartz build",
-    "publish-site": "node scripts/publish-site.cjs"
+    "publish-site": "node scripts/publish-site.cjs",
+    "auto:publish": "node scripts/auto-publish-watch.cjs"
   },
   "engines": {
     "npm": ">=10.9.2",
