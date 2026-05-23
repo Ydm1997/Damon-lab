@@ -17,7 +17,10 @@
     "check": "tsc --noEmit && npx prettier . --check",
     "format": "npx prettier . --write",
     "test": "tsx --test",
-    "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1"
+    "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1",
+    "gen": "node scripts/generate-index.cjs",
+    "site:dev": "npm run gen && npx quartz build --serve",
+    "site:build": "npm run gen && npx quartz build"
   },
   "engines": {
     "npm": ">=10.9.2",
