@@ -11,6 +11,10 @@ const FAILED_MARK_FILE = path.join(GIT_DIR, "PUSH_FAILED.txt")
 
 let stage = "start"
 
+function writeUtf8BomFile(file, text) {
+  fs.writeFileSync(file, "\ufeff" + text, "utf8")
+}
+
 function now() {
   const d = new Date()
   const pad = (n) => String(n).padStart(2, "0")
@@ -28,7 +32,7 @@ function log(msg) {
 
 function writeStatus(text) {
   try {
-    fs.writeFileSync(STATUS_FILE, `[${now()}]\n${text}\n`, "utf8")
+    writeUtf8BomFile(STATUS_FILE, `[${now()}]\n${text}\n`)
   } catch {}
 }
 
@@ -43,26 +47,36 @@ function notify(title, message, type = "info", seconds = 10) {
   if (process.platform !== "win32") return
 
   const iconMap = {
-    info: 64,
-    warn: 48,
-    error: 16,
+    info: "Information",
+    warn: "Warning",
+    error: "Error",
   }
 
-  const icon = iconMap[type] || 64
+  const icon = iconMap[type] || "Information"
 
   const ps = `
-$ws = New-Object -ComObject WScript.Shell
-$null = $ws.Popup(@'
-${safeText(message)}
-'@, ${seconds}, @'
+Add-Type -AssemblyName PresentationFramework
+
+$title = @'
 ${safeText(title)}
-'@, ${icon})
+'@
+
+$message = @'
+${safeText(message)}
+'@
+
+[System.Windows.MessageBox]::Show(
+  $message,
+  $title,
+  'OK',
+  '${icon}'
+) | Out-Null
 `
 
   const tmp = path.join(os.tmpdir(), `damonlab_publish_${Date.now()}.ps1`)
 
   try {
-    fs.writeFileSync(tmp, ps, "utf8")
+    writeUtf8BomFile(tmp, ps)
     execFileSync("powershell.exe", [
       "-NoProfile",
       "-ExecutionPolicy",
