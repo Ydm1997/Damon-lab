@@ -1,12 +1,11 @@
 ---
-title: Welcome to Quartz
+title: Welcome to Damon-Lab
 publish: "true"
 ---
 ---
-title: 大明实验室
 ---
 
-# 大明实验室
+# Damon-Lab
 
 这里是我的个人知识网站，用于记录技术实践、项目复盘、教育创新方案和长期思考。
 
